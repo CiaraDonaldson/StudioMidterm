@@ -1,0 +1,396 @@
+fileFormatVersion: 2
+guid: ce33509852e433a4ab65e3bc0d02c3be
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: 0
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: cute mushroom idle_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 0
+        width: 43
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b64ef41c52218a49a7ac834d917c087
+      internalID: -813417151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cute mushroom idle_1
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 0
+        width: 48
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0c7e43eb52d856458af9874090417f2
+      internalID: -1169695351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cute mushroom idle_2
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 0
+        width: 45
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df68fb987972ada4e98a12cf16575c6b
+      internalID: 410017449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cute mushroom idle_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 46
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84b98ca3b4b5fa04480029cb4b57e814
+      internalID: -581730925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cute mushroom idle_4
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 0
+        width: 45
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f263a7b103932e64e89c1d0e229ce5ec
+      internalID: -1575617337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cute mushroom idle_5
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 46
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3af5fdd8afc9ff429787a9bd5cf7f71
+      internalID: 1092031497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cute mushroom idle_6
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 0
+        width: 45
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 849cdfb2f5620bd41a8c2d55722e03cd
+      internalID: -1045084539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cute mushroom idle_7
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 0
+        width: 45
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed6c39e20f449224c80826a11bd3cbad
+      internalID: -1963956805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cute mushroom idle_8
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 48
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccb1e9871ae00bf4cb0be49b70d559d5
+      internalID: -1411308250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline:
+    - - {x: -182, y: 21}
+      - {x: -205, y: 21}
+      - {x: -214, y: 15}
+      - {x: -214, y: -3}
+      - {x: -204, y: -22}
+      - {x: -182, y: -22}
+      - {x: -171, y: -7}
+      - {x: -171, y: 10}
+      - {x: -176, y: 19}
+    - - {x: -130, y: 21}
+      - {x: -157, y: 21}
+      - {x: -166, y: 13}
+      - {x: -166, y: -1}
+      - {x: -160, y: -14}
+      - {x: -153, y: -22}
+      - {x: -135, y: -22}
+      - {x: -123, y: -6}
+      - {x: -123, y: 11}
+      - {x: -127, y: 20}
+    - - {x: -118, y: 22}
+      - {x: -118, y: -9}
+      - {x: -105, y: -22}
+      - {x: -86, y: -22}
+      - {x: -75, y: -6}
+      - {x: -75, y: 22}
+    - - {x: -61, y: 22}
+      - {x: -66, y: 21}
+      - {x: -70, y: 12}
+      - {x: -70, y: -6}
+      - {x: -58, y: -22}
+      - {x: -38, y: -22}
+      - {x: -27, y: -6}
+      - {x: -27, y: 15}
+      - {x: -39, y: 22}
+    - - {x: -13, y: 22}
+      - {x: -18, y: 21}
+      - {x: -22, y: 12}
+      - {x: -22, y: -6}
+      - {x: -10, y: -22}
+      - {x: 10, y: -22}
+      - {x: 21, y: -6}
+      - {x: 21, y: 15}
+      - {x: 9, y: 22}
+    - - {x: 30, y: 22}
+      - {x: 26, y: 19}
+      - {x: 26, y: -3}
+      - {x: 35, y: -22}
+      - {x: 57, y: -22}
+      - {x: 69, y: -5}
+      - {x: 69, y: 18}
+      - {x: 61, y: 22}
+    - - {x: 74, y: 22}
+      - {x: 74, y: -6}
+      - {x: 84, y: -22}
+      - {x: 102, y: -22}
+      - {x: 110, y: -20}
+      - {x: 117, y: -3}
+      - {x: 117, y: 12}
+      - {x: 115, y: 22}
+    - - {x: 124, y: 21}
+      - {x: 122, y: 20}
+      - {x: 122, y: -20}
+      - {x: 132, y: -22}
+      - {x: 155, y: -22}
+      - {x: 165, y: -6}
+      - {x: 165, y: 18}
+      - {x: 156, y: 21}
+    - - {x: 172, y: 21}
+      - {x: 170, y: 20}
+      - {x: 170, y: -20}
+      - {x: 180, y: -22}
+      - {x: 203, y: -22}
+      - {x: 213, y: -6}
+      - {x: 213, y: 18}
+      - {x: 204, y: 21}
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      cute mushroom idle_3: -581730925
+      cute mushroom idle_0: -813417151
+      cute mushroom idle_1: -1169695351
+      cute mushroom idle_2: 410017449
+      cute mushroom idle_5: 1092031497
+      cute mushroom idle_7: -1963956805
+      cute mushroom idle_6: -1045084539
+      cute mushroom idle_4: -1575617337
+      cute mushroom idle_8: -1411308250
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

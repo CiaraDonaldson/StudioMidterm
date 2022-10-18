@@ -13,11 +13,17 @@ public class PlayerController : MonoBehaviour
     private float jumpingPower = 10f;
     private bool isFacingRight = true;
 
+    private bool canDash = true;
+    public bool isDashing;
+    private float dashingPower = 30f;
+    private float dashingTime = .2f;
+    private float dashingCooldown = 1f;
     
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+  
 
     void Update()
     {
@@ -35,12 +41,18 @@ public class PlayerController : MonoBehaviour
         {
             //Wall Jump
 
-        }
-        if ("Level 1")
+        }*/
+        Scene scene = SceneManager.GetActiveScene();
+        string sceneName = scene.name;
+
+        if (sceneName == "Level 1")
         {
             //Dash
-            Input.GetKeyDown("E")
-        }*/
+           if(Input.GetKeyDown(KeyCode.W) && canDash)
+            {
+                StartCoroutine(Dash());        
+            }
+        }
 
         gravityMultiplier = collect;
     }
@@ -126,5 +138,19 @@ public class PlayerController : MonoBehaviour
             fruit += 1;
             Destroy(collider.gameObject);
         }
+    }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        yield return new WaitForSeconds(dashingTime);
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
     }
 }
