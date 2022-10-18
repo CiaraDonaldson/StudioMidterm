@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Start.unity
+    path: Assets/Scenes/End.unity
     guid: 817bf759ed6ee114093b2e345a0d4341
   - enabled: 1
     path: Assets/Scenes/the creature.unity

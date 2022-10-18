@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public int fruit = 0;
     public float collect = 0f;
-    public float gravityMultiplier;
+    private float gravityMultiplier;
     private float horizontal;
     private float speed = 8f;
     private float jumpingPower = 10f;
@@ -23,8 +23,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-  
 
+    public GameController GameController;
+
+    void Awake()
+    {
+        GameController.FindObjectOfType<GameController>();
+    }
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -33,7 +38,10 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpingPower, ForceMode2D.Impulse);
         }
-
+        if (Input.GetKeyUp("space") && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        }
         Flip();
 
         /*         
@@ -45,9 +53,10 @@ public class PlayerController : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         string sceneName = scene.name;
 
-        if (sceneName == "Level 1")
+        if (sceneName == "Level 1" || GameController.OneLevel == 1)
         {
             //Dash
+            Debug.Log("Dash");
            if(Input.GetKeyDown(KeyCode.W) && canDash)
             {
                 StartCoroutine(Dash());        

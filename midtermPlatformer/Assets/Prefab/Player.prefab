@@ -138,12 +138,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruit: 0
   collect: 0
-  gravityMultiplier: 0
+  isDashing: 0
   rb: {fileID: 5220868346494540103}
   groundCheck: {fileID: 5220868346494540106}
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
+  GameController: {fileID: 4663037876234065506, guid: 711b41b4f1ef7fe4da68abcb131e2d7b, type: 3}
 --- !u!50 &5220868346494540103
 Rigidbody2D:
   serializedVersion: 4
