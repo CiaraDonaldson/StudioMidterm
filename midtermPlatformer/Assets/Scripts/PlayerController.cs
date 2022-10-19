@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public int fruit = 0;
     public float collect = 0f;
-    private float gravityMultiplier;
+    //private float gravityMultiplier;
     private float horizontal;
     private float speed = 8f;
     private float jumpingPower = 10f;
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     public GameController GameController;
     public Animator anim;
-
+    
     void Awake()
     {
         GameController.FindObjectOfType<GameController>();
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyUp("space") && rb.velocity.y > 0f)
         {
-            rb.velocity = new Vector2(x, rb.velocity.y * 0.5f);
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
         Flip();
 
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        gravityMultiplier = collect;
+       // gravityMultiplier = collect;
     }
 
     private void FixedUpdate()
@@ -106,12 +106,14 @@ public class PlayerController : MonoBehaviour
                 else if(collect == 3 || collect == 0)
                 {
                     Debug.Log("You Died");
-                    //restartlayout
+                    GameController.RestartButton();
                 }
 
             }
 
-            if (Input.GetKeyDown(KeyCode.S) && collider.gameObject.tag == "Wall")
+        Scene scene = SceneManager.GetActiveScene();
+        string sceneName = scene.name;
+        if (Input.GetKeyDown(KeyCode.S) && collider.gameObject.tag == "Wall" && sceneName == "Level 1" || GameController.OneLevel == 1)
              {
             //Break Wall
                 Input.GetKeyDown("Q");
