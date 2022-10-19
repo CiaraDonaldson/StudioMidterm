@@ -145,6 +145,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   GameController: {fileID: 4663037876234065506, guid: 711b41b4f1ef7fe4da68abcb131e2d7b, type: 3}
+  anim: {fileID: 0}
 --- !u!50 &5220868346494540103
 Rigidbody2D:
   serializedVersion: 4

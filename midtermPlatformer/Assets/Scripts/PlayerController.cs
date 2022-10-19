@@ -15,8 +15,8 @@ public class PlayerController : MonoBehaviour
 
     private bool canDash = true;
     public bool isDashing;
-    private float dashingPower = 30f;
-    private float dashingTime = .2f;
+    private float dashingPower = 50f;
+    private float dashingTime = .5f;
     private float dashingCooldown = 1f;
     
 
@@ -25,10 +25,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     public GameController GameController;
+    public Animator anim;
 
     void Awake()
     {
         GameController.FindObjectOfType<GameController>();
+        
     }
     void Update()
     {
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyUp("space") && rb.velocity.y > 0f)
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            rb.velocity = new Vector2(x, rb.velocity.y * 0.5f);
         }
         Flip();
 
@@ -55,11 +57,13 @@ public class PlayerController : MonoBehaviour
 
         if (sceneName == "Level 1" || GameController.OneLevel == 1)
         {
-            //Dash
-            Debug.Log("Dash");
            if(Input.GetKeyDown(KeyCode.W) && canDash)
             {
-                StartCoroutine(Dash());        
+               
+                Debug.Log("Dash");
+                StartCoroutine(Dash());
+                anim.Play("Bolt Animation");
+
             }
         }
 
@@ -88,46 +92,50 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /*void OnCollisionEnter2D(Collider2D collider)
+    void OnCollisionEnter2D(Collision2D collider)
         {
 
             if (collider.gameObject.tag == "Enemy")
-        {
-            if(collect > 3)
-             {
-            collect -= 3;
-            Debug.Log(collect);
-             }
-            else if(collect == 3)
             {
-                Debug.Log("You Died");
-                //restartlayout
+                if(collect > 3)
+                {
+                    collect -= 3;
+                    Debug.Log(collect);
+                    HealthManager.instance.MinusScore();
+            }
+                else if(collect == 3 || collect == 0)
+                {
+                    Debug.Log("You Died");
+                    //restartlayout
+                }
+
             }
 
-        }
-
-            if (C && collider.gameObject.tag == "Wall")
-        {
+            if (Input.GetKeyDown(KeyCode.S) && collider.gameObject.tag == "Wall")
+             {
             //Break Wall
-            Input.GetKeyDown("Q")
-                Destroy(collider.gameObject)
-        }
-         }*/
+                Input.GetKeyDown("Q");
+                Destroy(collider.gameObject);
+             }
+         }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if ((collider.gameObject.name == "Choice"))// && (Input.GetKeyDown(KeyCode.Q)))
+        if ((collider.gameObject.name == "Choice")) //&& (Input.GetKeyDown(KeyCode.Q)))
         {
+            Debug.Log("Level Chosen");
             SceneManager.LoadScene("Level 1");
         }
 
-        if ((collider.gameObject.name == "Choice (1)"))// && (Input.GetKeyDown(KeyCode.Q)))
+        if ((collider.gameObject.name == "Choice (1)") && (Input.GetKeyDown(KeyCode.Q)))
         {
+            Debug.Log("Level Chosen");
             SceneManager.LoadScene("Level 2");
         }
 
-        if ((collider.gameObject.name == "Choice (2)")) // && (Input.GetKeyDown(KeyCode.Q)))
+        if ((collider.gameObject.name == "Choice (2)") && (Input.GetKeyDown(KeyCode.Q)))
         {
+            Debug.Log("Level Chosen");
             SceneManager.LoadScene("Level 3");
         }
 
@@ -136,11 +144,12 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("the creature");
         }
 
-        if ((collider.gameObject.name == "Collectable"))
+        if ((collider.gameObject.tag == "Collectable"))
         {
             collect += 1f;
             Debug.Log(collect);
             Destroy(collider.gameObject);
+            HealthManager.instance.AddScore();
         }
         if ((collider.gameObject.name == "Fruit"))
         {
