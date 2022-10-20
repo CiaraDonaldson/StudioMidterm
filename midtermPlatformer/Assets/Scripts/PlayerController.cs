@@ -26,9 +26,12 @@ public class PlayerController : MonoBehaviour
 
     public GameController GameController;
     public Animator anim;
-    
+    public AudioSource audioSource;
+
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
+        
         GameController.FindObjectOfType<GameController>();
         
     }
@@ -153,6 +156,7 @@ public class PlayerController : MonoBehaviour
 
         if ((collider.gameObject.tag == "Collectable"))
         {
+            audioSource.Play(0);
             collect += 1f;
             Debug.Log(collect);
             Destroy(collider.gameObject);

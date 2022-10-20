@@ -15,13 +15,23 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI Start2;
     public TextMeshProUGUI Start3;
 
+    public AudioSource bg;
+    
     // Start is called before the first frame update
+    void Awake()
+    {
+        bg = GetComponent<AudioSource>();
+        bg.Play(0);
+
+    }
     void Start()
     {
+
         DontDestroyOnLoad(this.gameObject);
         Start1 = gameObject.GetComponent<TextMeshProUGUI>();
         Start2 = gameObject.GetComponent<TextMeshProUGUI>();
         Start3 = gameObject.GetComponent<TextMeshProUGUI>();
+    
     }
 
     // Update is called once per frame
@@ -90,10 +100,14 @@ public class GameController : MonoBehaviour
     }
     private IEnumerator End()
     {
-       
-        yield return new WaitForSeconds(1);
-       
-        yield return new WaitForSeconds(1);
-        
+        Start1.enabled = true;
+        yield return new WaitForSeconds(3);
+        Start1.enabled = false;
+        Start2.enabled = true;
+        yield return new WaitForSeconds(3);
+        Start2.enabled = false;
+        Start3.enabled = true;
+        yield return new WaitForSeconds(3);
+        Start2.enabled = false;
     }
 }
