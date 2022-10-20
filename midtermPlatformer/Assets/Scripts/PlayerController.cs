@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public int fruit = 0;
     public float collect = 0f;
     //private float gravityMultiplier;
     private float horizontal;
@@ -18,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private float dashingPower = 50f;
     private float dashingTime = .5f;
     private float dashingCooldown = 1f;
+    
     
 
     [SerializeField] private Rigidbody2D rb;
@@ -51,7 +51,10 @@ public class PlayerController : MonoBehaviour
         {
             //Wall Jump
 
-        }*/
+        }
+        */
+
+
         Scene scene = SceneManager.GetActiveScene();
         string sceneName = scene.name;
 
@@ -67,7 +70,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-       // gravityMultiplier = collect;
+      
     }
 
     private void FixedUpdate()
@@ -92,38 +95,40 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collider)
+    void OnCollisionStay2D(Collision2D collider)
+    {
+
+        if (collider.gameObject.tag == "Enemy")
         {
-
-            if (collider.gameObject.tag == "Enemy")
+            if (collect > 3)
             {
-                if(collect > 3)
-                {
-                    collect -= 3;
-                    Debug.Log(collect);
-                    HealthManager.instance.MinusScore();
+                collect -= 3;
+                Debug.Log(collect);
+                HealthManager.instance.MinusScore();
             }
-                else if(collect == 3 || collect == 0)
-                {
-                    Debug.Log("You Died");
-                    GameController.RestartButton();
-                }
+            else if (collect == 3 || collect == 0)
+            {
+                Debug.Log("You Died");
+                GameController.RestartButton();
+            }
 
-            }
+        }
 
         Scene scene = SceneManager.GetActiveScene();
         string sceneName = scene.name;
-        if (Input.GetKeyDown(KeyCode.S) && collider.gameObject.tag == "Wall" && sceneName == "Level 1" || GameController.OneLevel == 1)
-             {
-            //Break Wall
-                Input.GetKeyDown("Q");
+        if (sceneName == "Level 3" || GameController.ThreeLevel == 1)
+        {
+            if (Input.GetKeyDown(KeyCode.S) && collider.gameObject.tag == "Wall" || collider.gameObject.tag == "Enemy")
+            {
+                Debug.Log("Boom");
                 Destroy(collider.gameObject);
-             }
-         }
+            }
+        }
+    }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    void OnTriggerStay2D(Collider2D collider)
     {
-        if ((collider.gameObject.name == "Choice")) //&& (Input.GetKeyDown(KeyCode.Q)))
+        if ((collider.gameObject.name == "Choice") && (Input.GetKeyDown(KeyCode.Q)))
         {
             Debug.Log("Level Chosen");
             SceneManager.LoadScene("Level 1");
@@ -155,8 +160,16 @@ public class PlayerController : MonoBehaviour
         }
         if ((collider.gameObject.name == "Fruit"))
         {
-            fruit += 1;
+            GameController.addFruit();
             Destroy(collider.gameObject);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.name == "entity")
+        {
+            GameController.Begining();
         }
     }
 
