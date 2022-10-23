@@ -8,14 +8,15 @@ TagManager:
   - NextLevel
   - Wall
   - Collectable
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
+  - Wall
   - 
   - 
   - 

@@ -544,7 +544,7 @@ Transform:
   - {fileID: 1689106046}
   - {fileID: 518915445}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &486022583
 GameObject:
@@ -712,7 +712,7 @@ Transform:
   - {fileID: 2124185290}
   - {fileID: 1421214130}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &511709000
 PrefabInstance:
@@ -1203,7 +1203,7 @@ RectTransform:
   - {fileID: 486022584}
   - {fileID: 868423890}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1223,7 +1223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5220868346494540106, guid: d180f09174c1dd24b8a477225a1ecab1, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5220868346494540106, guid: d180f09174c1dd24b8a477225a1ecab1, type: 3}
       propertyPath: m_LocalScale.x
@@ -1534,7 +1534,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1689106045
 PrefabInstance:
@@ -2780,7 +2780,7 @@ Transform:
   m_Children:
   - {fileID: 1762128902}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2043126958
 GameObject:
@@ -2793,7 +2793,7 @@ GameObject:
   - component: {fileID: 2043126960}
   - component: {fileID: 2043126959}
   m_Layer: 0
-  m_Name: creature
+  m_Name: entity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2864,7 +2864,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2124185289
 GameObject:

@@ -84,19 +84,26 @@ public class GameController : MonoBehaviour
             OneLevel = 0;
             TwoLevel = 0;
             ThreeLevel = 0;
+            HealthManager.instance.Reset();
         }
 
     private IEnumerator Begin()
     {
+        Start1.gameObject.SetActive(true);
         Start1.enabled = true;
         yield return new WaitForSeconds(3);
+        Start1.gameObject.SetActive(false);
         Start1.enabled = false;
+        Start2.gameObject.SetActive(true);
         Start2.enabled = true;
         yield return new WaitForSeconds(3);
+        Start2.gameObject.SetActive(false);
         Start2.enabled = false;
+        Start3.gameObject.SetActive(true);
         Start3.enabled = true;
         yield return new WaitForSeconds(3);
-        Start2.enabled = false;
+        Start3.gameObject.SetActive(false);
+        Start3.enabled = false;
     }
     private IEnumerator End()
     {
@@ -109,5 +116,7 @@ public class GameController : MonoBehaviour
         Start3.enabled = true;
         yield return new WaitForSeconds(3);
         Start2.enabled = false;
+
+
     }
 }

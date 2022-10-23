@@ -25,7 +25,7 @@ public class HealthManager : MonoBehaviour
     void Update()
     {
 
-        Health.text = ("Health = " + score.ToString());
+        Health.text = ("Health: " + score.ToString());
 
     }
 
@@ -38,5 +38,9 @@ public class HealthManager : MonoBehaviour
     {
         score -= 3;
 
+    }
+    public void Reset()
+    {
+        score = 0;
     }
 }

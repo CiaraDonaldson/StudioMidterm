@@ -6,32 +6,35 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public float collect = 0f;
-    //private float gravityMultiplier;
     private float horizontal;
     private float speed = 8f;
-    private float jumpingPower = 10f;
+    private float jumpingPower = 12f;
     private bool isFacingRight = true;
+    private CapsuleCollider2D boxCollider;
 
     private bool canDash = true;
     public bool isDashing;
     private float dashingPower = 50f;
-    private float dashingTime = .5f;
+    private float dashingTime = .6f;
     private float dashingCooldown = 1f;
+    private float wallJumpCooldown;
     
-    
-
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask wallLayer;
 
     public GameController GameController;
     public Animator anim;
     public AudioSource audioSource;
+   // public AudioSource death;
+    //public AudioSource fruit;
 
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        
+        //death = GetComponent<AudioSource>();
+        //fruit = GetComponent<AudioSource>();
+        boxCollider = GetComponent<CapsuleCollider2D>();
         GameController.FindObjectOfType<GameController>();
         
     }
@@ -39,28 +42,48 @@ public class PlayerController : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKeyDown("space") && IsGrounded())
+        if (Input.GetKeyDown("space"))
         {
-            rb.AddForce(Vector2.up * jumpingPower, ForceMode2D.Impulse);
+            Jump();
         }
-        if (Input.GetKeyUp("space") && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        }
+      
         Flip();
-
-        /*         
-         if ("Level 2")
-        {
-            //Wall Jump
-
-        }
-        */
-
 
         Scene scene = SceneManager.GetActiveScene();
         string sceneName = scene.name;
 
+        //Wall Jump
+        if (sceneName == "Level 2" || GameController.TwoLevel == 1)
+        {
+            if (wallJumpCooldown > 0.2f)
+            {
+                rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+
+
+                if (OnWall() && !IsGrounded())
+                    {
+                        rb.gravityScale = 0;
+                        rb.velocity = Vector2.zero;
+                    }
+                    else
+                    {
+                        rb.gravityScale = 1;
+                    }
+                if (Input.GetKeyDown("space"))
+                {
+                    Jump();
+                }
+
+
+            }
+            else
+                {
+                    wallJumpCooldown += Time.deltaTime;
+                }
+         }
+        
+        
+        //Dash
         if (sceneName == "Level 1" || GameController.OneLevel == 1)
         {
            if(Input.GetKeyDown(KeyCode.W) && canDash)
@@ -75,7 +98,28 @@ public class PlayerController : MonoBehaviour
 
       
     }
-
+    private void Jump()
+        {
+            if (IsGrounded())
+            {
+               rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            }
+            else if (OnWall() && IsGrounded())
+            {
+                 if (horizontal == 0)
+                {
+                    rb.velocity = new Vector3(-Mathf.Sign(transform.localScale.x) * 10, 0);
+                    transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                 }
+            }   
+            else
+            {
+                rb.velocity = new Vector3(-Mathf.Sign(transform.localScale.x) * 3, 6);
+            }
+                wallJumpCooldown = 0;
+        
+       }
+        
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
@@ -84,7 +128,14 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
+        return raycastHit.collider != null;
+    } 
+
+    private bool OnWall()
+    {
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x,0), 0.1f, wallLayer);
+        return raycastHit.collider != null;
     }
 
     private void Flip()
@@ -111,6 +162,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (collect == 3 || collect == 0)
             {
+                //death.Play(0);
                 Debug.Log("You Died");
                 GameController.RestartButton();
             }
@@ -164,6 +216,7 @@ public class PlayerController : MonoBehaviour
         }
         if ((collider.gameObject.name == "Fruit"))
         {
+            //fruit.Play(0);
             GameController.addFruit();
             Destroy(collider.gameObject);
         }
