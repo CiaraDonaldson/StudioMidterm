@@ -125,13 +125,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collect: 0
   isDashing: 0
+  Begin: {fileID: 4663037876234065506, guid: 711b41b4f1ef7fe4da68abcb131e2d7b, type: 3}
   rb: {fileID: 5220868346494540103}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   wallLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   GameController: {fileID: 4663037876234065506, guid: 711b41b4f1ef7fe4da68abcb131e2d7b, type: 3}
   anim: {fileID: 5220868346494540105}
   audioSource: {fileID: 1304691157295752532}

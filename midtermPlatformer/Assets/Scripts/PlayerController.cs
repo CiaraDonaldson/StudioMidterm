@@ -18,7 +18,9 @@ public class PlayerController : MonoBehaviour
     private float dashingTime = .6f;
     private float dashingCooldown = 1f;
     private float wallJumpCooldown;
-    
+
+    public GameController Begin;
+
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
@@ -36,21 +38,22 @@ public class PlayerController : MonoBehaviour
         //fruit = GetComponent<AudioSource>();
         boxCollider = GetComponent<CapsuleCollider2D>();
         GameController.FindObjectOfType<GameController>();
-        
+
+       
     }
+
     void Update()
     {
+    
         horizontal = Input.GetAxisRaw("Horizontal");
+        Scene scene = SceneManager.GetActiveScene();
+        string sceneName = scene.name;
+        Flip();
 
         if (Input.GetKeyDown("space"))
         {
             Jump();
-        }
-      
-        Flip();
-
-        Scene scene = SceneManager.GetActiveScene();
-        string sceneName = scene.name;
+        }     
 
         //Wall Jump
         if (sceneName == "Level 2" || GameController.TwoLevel == 1)
@@ -91,35 +94,14 @@ public class PlayerController : MonoBehaviour
                
                 Debug.Log("Dash");
                 StartCoroutine(Dash());
-                anim.Play("Bolt Animation");
+                anim.Play("Charged Animation");
 
             }
         }
 
       
     }
-    private void Jump()
-        {
-            if (IsGrounded())
-            {
-               rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-            }
-            else if (OnWall() && IsGrounded())
-            {
-                 if (horizontal == 0)
-                {
-                    rb.velocity = new Vector3(-Mathf.Sign(transform.localScale.x) * 10, 0);
-                    transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                 }
-            }   
-            else
-            {
-                rb.velocity = new Vector3(-Mathf.Sign(transform.localScale.x) * 3, 6);
-            }
-                wallJumpCooldown = 0;
-        
-       }
-        
+      
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
@@ -136,6 +118,29 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x,0), 0.1f, wallLayer);
         return raycastHit.collider != null;
+    }
+
+    private void Jump()
+    {
+        if (IsGrounded())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            anim.Play("Bolt Animation");
+        }
+        else if (OnWall() && IsGrounded())
+        {
+            if (horizontal == 0)
+            {
+                rb.velocity = new Vector3(-Mathf.Sign(transform.localScale.x) * 10, 0);
+                transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+        }
+        else
+        {
+            rb.velocity = new Vector3(-Mathf.Sign(transform.localScale.x) * 3, 6);
+        }
+        wallJumpCooldown = 0;
+
     }
 
     private void Flip()
@@ -176,6 +181,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.S) && collider.gameObject.tag == "Wall" || collider.gameObject.tag == "Enemy")
             {
                 Debug.Log("Boom");
+                anim.Play("Hit-4 Animation");
                 Destroy(collider.gameObject);
             }
         }
@@ -186,23 +192,27 @@ public class PlayerController : MonoBehaviour
         if ((collider.gameObject.name == "Choice") && (Input.GetKeyDown(KeyCode.Q)))
         {
             Debug.Log("Level Chosen");
+            anim.Play("Hit-6 Animation");
             SceneManager.LoadScene("Level 1");
         }
 
         if ((collider.gameObject.name == "Choice (1)") && (Input.GetKeyDown(KeyCode.Q)))
         {
             Debug.Log("Level Chosen");
+            anim.Play("Hit-6 Animation");
             SceneManager.LoadScene("Level 2");
         }
 
         if ((collider.gameObject.name == "Choice (2)") && (Input.GetKeyDown(KeyCode.Q)))
         {
             Debug.Log("Level Chosen");
+            anim.Play("Hit-6 Animation");
             SceneManager.LoadScene("Level 3");
         }
 
         if (collider.gameObject.tag == "NextLevel")
         {
+            anim.Play("Hit-6 Animation");
             SceneManager.LoadScene("the creature");
         }
 
@@ -226,7 +236,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collider.gameObject.name == "entity")
         {
-            GameController.Begining();
+           StartCoroutine(GameController.Begin());
         }
     }
 

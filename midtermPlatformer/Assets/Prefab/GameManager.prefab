@@ -50,10 +50,11 @@ MonoBehaviour:
   TwoLevel: 0
   ThreeLevel: 0
   fruit: 0
-  Start1: {fileID: 0}
-  Start2: {fileID: 0}
-  Start3: {fileID: 0}
-  bg: {fileID: 0}
+  Start1: {fileID: 1417681467367721847, guid: 260b0936e26ebaf4ca958a8c7fb897c4, type: 3}
+  End11: {fileID: 2306482109024345522, guid: 3086ddaaad64f104994cde97a91b8808, type: 3}
+  End21: {fileID: 8913387621499214573, guid: 96513663d40ab6d4daabb1adf9dedeb4, type: 3}
+  End31: {fileID: 7394570255399891234, guid: 58d48345c3a114e49ae79414ad48ca80, type: 3}
+  bg: {fileID: 8038748754731536637}
 --- !u!114 &6981605965063032601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  Health: {fileID: 0}
+  Health: {fileID: 1738118863238154839, guid: d87d5262b8044b04ab299738ddd3365a, type: 3}
 --- !u!82 &8038748754731536637
 AudioSource:
   m_ObjectHideFlags: 0
