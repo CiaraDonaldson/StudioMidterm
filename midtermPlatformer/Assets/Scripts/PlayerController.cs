@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private float dashingCooldown = 1f;
     private float wallJumpCooldown;
 
-    public GameController Begin;
+    
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private LayerMask groundLayer;
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     public GameController GameController;
     public Animator anim;
     public AudioSource audioSource;
-   // public AudioSource death;
+    //public AudioSource death;
     //public AudioSource fruit;
 
     void Awake()
@@ -46,10 +46,12 @@ public class PlayerController : MonoBehaviour
     {
     
         horizontal = Input.GetAxisRaw("Horizontal");
+
         Scene scene = SceneManager.GetActiveScene();
         string sceneName = scene.name;
-        Flip();
 
+        Flip();
+        //Jump
         if (Input.GetKeyDown("space"))
         {
             Jump();
@@ -157,22 +159,6 @@ public class PlayerController : MonoBehaviour
     void OnCollisionStay2D(Collision2D collider)
     {
 
-        if (collider.gameObject.tag == "Enemy")
-        {
-            if (collect > 3)
-            {
-                collect -= 3;
-                Debug.Log(collect);
-                HealthManager.instance.MinusScore();
-            }
-            else if (collect == 3 || collect == 0)
-            {
-                //death.Play(0);
-                Debug.Log("You Died");
-                GameController.RestartButton();
-            }
-
-        }
 
         Scene scene = SceneManager.GetActiveScene();
         string sceneName = scene.name;
@@ -236,7 +222,25 @@ public class PlayerController : MonoBehaviour
     {
         if (collider.gameObject.name == "entity")
         {
-           StartCoroutine(GameController.Begin());
+           //StartCoroutine(GameController.Begin());
+        }
+
+        if (collider.gameObject.tag == "Enemy")
+        {
+            if (collect > 3)
+            {
+                collect -= 3;
+                Debug.Log(collect);
+                HealthManager.instance.MinusScore();
+            }
+            else if (collect == 3 || collect == 0 || collect == 2 || collect == 1)
+            {
+                //death.Play(0);
+                Debug.Log("You Died");
+                HealthManager.instance.MinusScore();
+                GameController.RestartButton();
+            }
+
         }
     }
 

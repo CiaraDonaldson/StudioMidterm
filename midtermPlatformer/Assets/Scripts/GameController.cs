@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
     public int ThreeLevel = 0;
     public int fruit = 0;
 
-    private int done = 0;
+
     public TextMeshProUGUI Start1;
     public TextMeshProUGUI End11;
     public TextMeshProUGUI End21;
@@ -31,8 +31,9 @@ public class GameController : MonoBehaviour
 
         DontDestroyOnLoad(this.gameObject);
 
-       
-    
+        StartCoroutine(Begin());
+
+
     }
 
     // Update is called once per frame
@@ -45,37 +46,73 @@ public class GameController : MonoBehaviour
         if (sceneName == "Level 1")
         {
             OneLevel = 1;
+        
         }
         else if (sceneName == "Level 2")
         {
             TwoLevel = 1;
+           
         }
         else if (sceneName == "Level 3")
         {
             ThreeLevel = 1;
+            
         }
-        
-      
 
-        else if (fruit == 2 && sceneName == "the creature")
+        if (fruit == 1 && sceneName == "the creature")
+        {
+            StartCoroutine(Continue());
+        }
+
+        else  if (fruit == 2 && sceneName == "the creature")
         {
             if (OneLevel == 1 && TwoLevel == 1)
             {
                 StartCoroutine(End());
             }
-            if (OneLevel == 1 && ThreeLevel == 1)
+            else if (OneLevel == 1 && ThreeLevel == 1)
             {
                 StartCoroutine(End2());
             }
-            if (ThreeLevel == 1 && TwoLevel == 1)
+            else if (ThreeLevel == 1 && TwoLevel == 1)
             {
                 StartCoroutine(End3());
             }
-        }  
+        }
+
+        if (OneLevel == 1 && sceneName == "the creature")
+        {
+            GameObject.Find("Choice1");
+            Destroy(gameObject);
+        }
+        else if (TwoLevel == 1 && sceneName == "the creature")
+        {
+            GameObject.Find("Choice2");
+            Destroy(gameObject);
+        }
+        else if (ThreeLevel == 1 && sceneName == "the creature")
+        {
+            GameObject.Find("Choice3");
+            Destroy(gameObject);
+        }
     }
 
+    public IEnumerator Continue()
+    {
+        yield return new WaitForSeconds(5);
+        Start1.gameObject.SetActive(true);
+        Start1.enabled = true;
+        Start1.text = "You are doing well child!";
+        yield return new WaitForSeconds(3);
+        Start1.text = "One more fruit to cure me..";
+        yield return new WaitForSeconds(3);
+        Start1.gameObject.SetActive(false);
+        Start1.enabled = false;
+
+    }
     public IEnumerator Begin()
     {
+        yield return new WaitForSeconds(5);
         Start1.gameObject.SetActive(true);
         Start1.enabled = true;
         yield return new WaitForSeconds(3);
@@ -85,10 +122,11 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(3);
         Start1.gameObject.SetActive(false);
         Start1.enabled = false;
-        done += 1;
+
     }
     private IEnumerator End()
     {
+        yield return new WaitForSeconds(3);
         End11.gameObject.SetActive(true);
         End11.enabled = true;
         yield return new WaitForSeconds(3);
@@ -103,6 +141,7 @@ public class GameController : MonoBehaviour
     }
     private IEnumerator End2()
     {
+        yield return new WaitForSeconds(3);
         End21.gameObject.SetActive(true);
         End21.enabled = true;
         yield return new WaitForSeconds(3);
@@ -116,6 +155,7 @@ public class GameController : MonoBehaviour
     }
     private IEnumerator End3()
     {
+        yield return new WaitForSeconds(3);
         End31.gameObject.SetActive(true);
         End31.enabled = true;
         yield return new WaitForSeconds(3);
@@ -125,13 +165,6 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(3);
         End31.gameObject.SetActive(false);
         End31.enabled = false;
-
-    }
-
-    public void Begining()
-    {
-        
-       // StartCoroutine(Begin());
 
     }
 
