@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public float collect = 0f;
+    public int collect = 0;
     private float horizontal;
     private float speed = 8f;
     private float jumpingPower = 12f;
@@ -19,23 +19,27 @@ public class PlayerController : MonoBehaviour
     private float dashingCooldown = 1f;
     private float wallJumpCooldown;
 
-    
+
+    public bool IsGrounded = true;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
 
     public GameController GameController;
+    public TextController TextController;
     public Animator anim;
     public AudioSource audioSource;
-    //public AudioSource death;
-    //public AudioSource fruit;
+    public AudioClip boom;
+    public AudioClip dash;
+    public AudioClip death;
+    public AudioClip fruit;
+    public AudioClip choice;
+
 
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        //death = GetComponent<AudioSource>();
-        //fruit = GetComponent<AudioSource>();
         boxCollider = GetComponent<CapsuleCollider2D>();
         GameController.FindObjectOfType<GameController>();
 
@@ -51,11 +55,17 @@ public class PlayerController : MonoBehaviour
         string sceneName = scene.name;
 
         Flip();
-        //Jump
-        if (Input.GetKeyDown("space"))
+
+
+
+        if (rb.velocity.y == 0)
         {
-            Jump();
-        }     
+            IsGrounded = true;
+        }
+        else
+        {
+            IsGrounded = false;
+        }
 
         //Wall Jump
         if (sceneName == "Level 2" || GameController.TwoLevel == 1)
@@ -65,7 +75,7 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
 
 
-                if (OnWall() && !IsGrounded())
+                if (!IsGrounded  && OnWall())
                     {
                         rb.gravityScale = 0;
                         rb.velocity = Vector2.zero;
@@ -74,6 +84,7 @@ public class PlayerController : MonoBehaviour
                     {
                         rb.gravityScale = 1;
                     }
+
                 if (Input.GetKeyDown("space"))
                 {
                     Jump();
@@ -93,7 +104,7 @@ public class PlayerController : MonoBehaviour
         {
            if(Input.GetKeyDown(KeyCode.W) && canDash)
             {
-               
+                audioSource.PlayOneShot(dash, 1);
                 Debug.Log("Dash");
                 StartCoroutine(Dash());
                 anim.Play("Charged Animation");
@@ -108,13 +119,17 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
 
-    }
+        if (IsGrounded)
+        {
+            if (Input.GetKeyDown("space"))
+            {
+                Jump();
 
-    private bool IsGrounded()
-    {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
-        return raycastHit.collider != null;
-    } 
+            }
+        }
+
+
+    }
 
     private bool OnWall()
     {
@@ -124,12 +139,13 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (IsGrounded())
+        if (IsGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             anim.Play("Bolt Animation");
         }
-        else if (OnWall() && IsGrounded())
+
+        else if (OnWall() && IsGrounded)
         {
             if (horizontal == 0)
             {
@@ -158,26 +174,30 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D collider)
     {
-
+       
 
         Scene scene = SceneManager.GetActiveScene();
         string sceneName = scene.name;
         if (sceneName == "Level 3" || GameController.ThreeLevel == 1)
         {
-            if (Input.GetKeyDown(KeyCode.S) && collider.gameObject.tag == "Wall" || collider.gameObject.tag == "Enemy")
+            if (Input.GetKeyDown(KeyCode.S) && collider.gameObject.tag == "Wall" | collider.gameObject.tag == "Enemy")
             {
                 Debug.Log("Boom");
+                audioSource.PlayOneShot(boom, 1);
                 anim.Play("Hit-4 Animation");
                 Destroy(collider.gameObject);
             }
         }
     }
 
+ 
+
     void OnTriggerStay2D(Collider2D collider)
     {
         if ((collider.gameObject.name == "Choice") && (Input.GetKeyDown(KeyCode.Q)))
         {
             Debug.Log("Level Chosen");
+            audioSource.PlayOneShot(choice, 1);
             anim.Play("Hit-6 Animation");
             SceneManager.LoadScene("Level 1");
         }
@@ -205,25 +225,21 @@ public class PlayerController : MonoBehaviour
         if ((collider.gameObject.tag == "Collectable"))
         {
             audioSource.Play(0);
-            collect += 1f;
+            collect += 1;
             Debug.Log(collect);
             Destroy(collider.gameObject);
             HealthManager.instance.AddScore();
         }
         if ((collider.gameObject.name == "Fruit"))
         {
-            //fruit.Play(0);
+            audioSource.PlayOneShot(fruit, 1);
             GameController.addFruit();
             Destroy(collider.gameObject);
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    void OnCollisionEnter2D(Collision2D collider)
     {
-        if (collider.gameObject.name == "entity")
-        {
-           //StartCoroutine(GameController.Begin());
-        }
 
         if (collider.gameObject.tag == "Enemy")
         {
@@ -235,7 +251,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (collect == 3 || collect == 0 || collect == 2 || collect == 1)
             {
-                //death.Play(0);
+                audioSource.PlayOneShot(death, 1);
                 Debug.Log("You Died");
                 HealthManager.instance.MinusScore();
                 GameController.RestartButton();

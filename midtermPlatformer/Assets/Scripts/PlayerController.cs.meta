@@ -3,7 +3,17 @@ guid: 436e0dbee82dbd649a9adf54577211ef
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - rb: {instanceID: 0}
+  - GameController: {instanceID: 0}
+  - TextController: {instanceID: 0}
+  - anim: {instanceID: 0}
+  - audioSource: {instanceID: 0}
+  - boom: {fileID: 8300000, guid: d2b14d21e5b6d474bb0f12d1bfd77e39, type: 3}
+  - dash: {fileID: 8300000, guid: 6e2badb36eefb0042ad9e3f7433d1c68, type: 3}
+  - death: {fileID: 8300000, guid: 768c5ab45f0e39e42a77ef29fc69316b, type: 3}
+  - fruit: {fileID: 8300000, guid: 8b89f1beb7da9fb4eac78132f67241fa, type: 3}
+  - choice: {fileID: 8300000, guid: 6ee52b49f2f2e5847a8741acd8778856, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

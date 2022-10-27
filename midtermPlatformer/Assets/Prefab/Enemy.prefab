@@ -148,3 +148,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   PlayerController: {fileID: 0}
+  detectRange: 30
+  inRange: 0
+  moveSpeed: 5

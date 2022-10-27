@@ -17,7 +17,7 @@ public class HealthManager : MonoBehaviour
     {
         instance = this;
         DontDestroyOnLoad(this.gameObject);
-        score = 0;
+       
 
     }
 

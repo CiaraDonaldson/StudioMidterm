@@ -11,8 +11,13 @@ public class GameController : MonoBehaviour
     public int ThreeLevel = 0;
     public int fruit = 0;
 
+    public GameObject fox;
+    public GameObject wolf;
+    public GameObject bear;
+    public GameObject player;
 
     public TextMeshProUGUI Start1;
+    public TextMeshProUGUI Continue1;
     public TextMeshProUGUI End11;
     public TextMeshProUGUI End21;
     public TextMeshProUGUI End31;
@@ -29,42 +34,41 @@ public class GameController : MonoBehaviour
     void Start()
     {
 
-        DontDestroyOnLoad(this.gameObject);
-
-        StartCoroutine(Begin());
 
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
         Scene scene = SceneManager.GetActiveScene();
         string sceneName = scene.name;
 
         if (sceneName == "Level 1")
         {
             OneLevel = 1;
-        
+
         }
         else if (sceneName == "Level 2")
         {
             TwoLevel = 1;
-           
+
         }
         else if (sceneName == "Level 3")
         {
             ThreeLevel = 1;
-            
+
         }
 
-        if (fruit == 1 && sceneName == "the creature")
+
+
+        if (fruit == 0 && sceneName == "the creature")
+        {
+            Debug.Log("Begin OWOWOWO");
+
+            StartCoroutine(Begin());
+        }
+        else if (fruit == 1 && sceneName == "the creature")
         {
             StartCoroutine(Continue());
         }
 
-        else  if (fruit == 2 && sceneName == "the creature")
+        else if (fruit == 2 && sceneName == "the creature")
         {
             if (OneLevel == 1 && TwoLevel == 1)
             {
@@ -80,39 +84,21 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if (OneLevel == 1 && sceneName == "the creature")
-        {
-            GameObject.Find("Choice1");
-            Destroy(gameObject);
-        }
-        else if (TwoLevel == 1 && sceneName == "the creature")
-        {
-            GameObject.Find("Choice2");
-            Destroy(gameObject);
-        }
-        else if (ThreeLevel == 1 && sceneName == "the creature")
-        {
-            GameObject.Find("Choice3");
-            Destroy(gameObject);
-        }
-    }
 
-    public IEnumerator Continue()
-    {
-        yield return new WaitForSeconds(5);
-        Start1.gameObject.SetActive(true);
-        Start1.enabled = true;
-        Start1.text = "You are doing well child!";
-        yield return new WaitForSeconds(3);
-        Start1.text = "One more fruit to cure me..";
-        yield return new WaitForSeconds(3);
-        Start1.gameObject.SetActive(false);
-        Start1.enabled = false;
+        //  DontDestroyOnLoad(this.gameObject);
+
+        //StartCoroutine(Begin());
+
 
     }
+
+    // Update is called once per frame
+
+
     public IEnumerator Begin()
     {
-        yield return new WaitForSeconds(5);
+        Debug.Log("Begin");
+        yield return new WaitForSeconds(1);
         Start1.gameObject.SetActive(true);
         Start1.enabled = true;
         yield return new WaitForSeconds(3);
@@ -122,57 +108,78 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(3);
         Start1.gameObject.SetActive(false);
         Start1.enabled = false;
+        yield return new WaitForSeconds(3);
+        StopCoroutine(Begin());
+    }
+    public IEnumerator Continue()
+    {
+        yield return new WaitForSeconds(1);
+        Continue1.gameObject.SetActive(true);
+        Continue1.enabled = true;
+        Continue1.text = "You are doing well child!";
+        yield return new WaitForSeconds(3);
+        Continue1.text = "Just one more fruit to cure me..";
+        yield return new WaitForSeconds(3);
+        Continue1.gameObject.SetActive(false);
+        Continue1.enabled = false;
 
+   
     }
     private IEnumerator End()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
         End11.gameObject.SetActive(true);
         End11.enabled = true;
+        End11.text = "Ah the fruits of Agility, Dashing and Wall Jumping..";
         yield return new WaitForSeconds(3);
-        End11.text = "";
-        yield return new WaitForSeconds(3);
-        End11.text = "";
+        End11.text = "There's only one creature who you could be!";
         yield return new WaitForSeconds(3);
         End11.gameObject.SetActive(false);
         End11.enabled = false;
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("End");
+
+      
 
 
     }
     private IEnumerator End2()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
         End21.gameObject.SetActive(true);
         End21.enabled = true;
+        End21.text = "Ah the fruits of Power, Dashing and Disintegration";
         yield return new WaitForSeconds(3);
-        End21.text = "";
-        yield return new WaitForSeconds(3);
-        End21.text = "";
+        End21.text = "There's only one creature who you could be!";
         yield return new WaitForSeconds(3);
         End21.gameObject.SetActive(false);
         End21.enabled = false;
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("End 1");
+
 
     }
     private IEnumerator End3()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
         End31.gameObject.SetActive(true);
         End31.enabled = true;
+        End31.text = "Ah the fruits of Tactics, Wall Jumping and Disintegration";
         yield return new WaitForSeconds(3);
-        End31.text = "";
-        yield return new WaitForSeconds(3);
-        End31.text = "";
+        End31.text = "There's only one creature who you could be!";
         yield return new WaitForSeconds(3);
         End31.gameObject.SetActive(false);
         End31.enabled = false;
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("End 2");
 
     }
 
-        public void addFruit()
-        {
-         fruit += 1;
-        }
-        public void exitgame()
+    public void addFruit()
+    {
+        fruit += 1;
+    }
+    public void exitgame()
         {
             Debug.Log("exitgame");
             Application.Quit();
